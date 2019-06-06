@@ -7,11 +7,11 @@
 
 using namespace std;
 
-  // bt_node is the binary search tree node structure.
-  struct bt_node {
+  // bst_node is the binary search tree node structure.
+  struct bst_node {
     int data;
-    shared_ptr<bt_node> left;
-    shared_ptr<bt_node> right;
+    shared_ptr<bst_node> left;
+    shared_ptr<bst_node> right;
   };
 
   // Binary search tree:
@@ -29,18 +29,18 @@ public:
   // freeing memory and you can leave this blank
   ~BST();
 
-  // init_node initializes a new bt_node from the heap using the given
+  // init_node initializes a new bst_node from the heap using the given
   // data, and two NULL children, and returns a pointer to it.
-  shared_ptr<bt_node> InitNode(int data);
+  shared_ptr<bst_node> InitNode(int data);
 
   // insert places the new_node in a proper location in the tree
   // while obeying the invariant. On return, root_ptr_
   // points to the root of the tree.
-  void Insert(shared_ptr<bt_node> new_node);
+  void Insert(shared_ptr<bst_node> new_node);
 
-  // insert_data creates a new node with the given data value and
+  // insertData creates a new node with the given data value and
   // inserts it similarly to insert().
-  void Insert_data(int data);
+  void InsertData(int data);
 
   // remove removes a node from the tree whose data value matches the
   // input. If no node in the tree contains the given data, this function
@@ -49,16 +49,16 @@ public:
 
   // contains returns true if any node in the subtree pointed to by t
   // contains the given data value, false otherwise.
-  bool Contains(shared_ptr<bt_node> subt, int data);
+  bool Contains(shared_ptr<bst_node> subt, int data);
 
   // get_node searches through the subtree pointed to by subt for a node that
   // contains the given data value. If such a node is found, a pointer
   // to it is returned. Otherwise this function returns NULL.
-  shared_ptr<bt_node> GetNode(shared_ptr<bt_node> subt, int data);
+  shared_ptr<bst_node> GetNode(shared_ptr<bst_node> subt, int data);
 
   // size returns the number of nodes in the subtree pointed to by subt. If
   // the tree is empty (t is NULL), it returns zero.
-  int Size(shared_ptr<bt_node> subt);
+  int Size(shared_ptr<bst_node> subt);
 
   // to_array fills an integer array to reflect the contents of the
   // subtree pointed to by subt. Size of the filled array will be the same as the
@@ -74,19 +74,21 @@ public:
   // vector<int> my_vec(10);
   // and pass that vector by reference to ToArray function to be filled like:
   // ToArray(somesharedpointer, myvec)
-  void ToArray(shared_ptr<bt_node> subt, vector<int>& arr);
+  void ToArray(shared_ptr<bst_node> subt, vector<int>& arr);
 
   // This function is implemented for you
   // Returns the root pointer
-  shared_ptr<bt_node> GetRoot();
+  shared_ptr<bst_node> GetRoot();
 
   // This function is implemented for you
   // sets a given pointer as the top pointer
-  void SetRoot(shared_ptr<bt_node> root_ptr);
+  void SetRoot(shared_ptr<bst_node> root_ptr);
+
+  // you can add add more public member variables and member functions here if you need
 
 private:
   // this pointer always will point to root of the tree
-  shared_ptr<bt_node> root_ptr_;
+  shared_ptr<bst_node> root_ptr_;
   // you can add add more private member variables and member functions here if you need
 };
 
