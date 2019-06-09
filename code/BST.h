@@ -60,21 +60,21 @@ public:
   // the tree is empty (t is NULL), it returns zero.
   int Size(shared_ptr<bst_node> subt);
 
-  // to_array fills an integer array to reflect the contents of the
+  // ToVector fills an integer vector to reflect the contents of the
   // subtree pointed to by subt. Size of the filled array will be the same as the
   // subtree's size (found with the size() function), and the order of
-  // the array elements are the same that is found during an inorder
+  // the array elements are the same that is found during an INORDER
   // traversal of the subtree.
   //
-  // Note: the array is created and sized before this function is
+  // Note: the vector is created and sized before this function is
   // called. You will have at least Size(root_ptr_) elements available, so you
   // may safely index [0..size(t)-1].
   // vector<int> is a cpp class which defines a vector of type int.
   // for example you can define a vector of size 10 like:
   // vector<int> my_vec(10);
   // and pass that vector by reference to ToArray function to be filled like:
-  // ToArray(somesharedpointer, myvec)
-  void ToArray(shared_ptr<bst_node> subt, vector<int>& arr);
+  // ToVector(somesharedpointer, my_vec)
+  void ToVector(shared_ptr<bst_node> subt, vector<int>& vec);
 
   // This function is implemented for you
   // Returns the root pointer

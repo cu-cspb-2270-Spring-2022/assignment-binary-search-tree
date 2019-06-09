@@ -22,6 +22,8 @@ protected:
 		if(outgrade.is_open())
 		outgrade.clear();
 
+		max_grade = 100;
+
 		outgrade << (int)std::ceil(100*total_grade/max_grade);
 		outgrade.close();
 
@@ -61,17 +63,17 @@ shared_ptr<bst_node> HandBuildNode( int data )
 
 shared_ptr<bst_node> HandBuildTree ( )
 {
-	// Hand build an unbalanced tree with 0, 1, 2, 3, 4, 5 in it. Looks
-	// like this:
-	//
-	//    1
-	//   / \
-	//  0   4
-	//     /  \
-	//    3    5
-	//   /
-	//  2
-	//
+	/* Hand build an unbalanced tree with 0, 1, 2, 3, 4, 5 in it. Looks
+	   like this:
+	  
+	      1
+	     / \
+	    0   4
+	       /  \
+	      3    5
+	     /
+	    2
+	*/
 	shared_ptr<bst_node> top = HandBuildNode(1);
 	top->left = HandBuildNode(0);
 	top->right = HandBuildNode(4);
@@ -82,65 +84,19 @@ shared_ptr<bst_node> HandBuildTree ( )
 	return top;
 }
 
-void _inOrderWalk( shared_ptr<bst_node> top, vector<int>& arr, int& index ) {
-	if (!top) return;
-	// first make an array out of the left side
-	if (top->left) _inOrderWalk(top->left, arr, index);
-
-	// add our current node
-	arr[index] = top->data;
-	index++;
-
-	// and make one from the right
-	if (top->right) _inOrderWalk(top->right, arr, index);
-}
-
-void inOrderWalk( shared_ptr<bst_node> top, vector<int>& arr) {
-	// check for empty tree
-	if (!top) return;
-
-	int index = 0;
-
-	// call our helper, with the added index field
-	// to keep track of our position in the array
-	_inOrderWalk(top, arr, index);
-}
-
-int treeSize( shared_ptr<bst_node> top) {
-	if (!top) return 0; 
-
-	int left = 0; 
-	int right = 0; 
-
-	if (top->left)  left =  treeSize(top->left); 
-	if (top->right) right = treeSize(top->right); 
-
-	return left + right + 1; 
-}
-
-bool ArrayContains ( vector<int>& arr, int size, int value )
-{
-	for(int i = 0; i < size; i++){
-    	if (arr[i] == value)
-		return true;
-    }
-  return false;
-}
-
 TEST_F(test_BST, TestConstructor){
 	BST mybst;
 	// expect root to be NULL when BST object constructed
-	EXPECT_FALSE(mybst.GetRoot());
+	// ASSERT_FALSE(mybst.GetRoot());
 }
-
 
 TEST_F(test_BST, TestInit){
 	BST mybst;
 	shared_ptr<bst_node> nodeptr = mybst.InitNode(4);  
-	EXPECT_TRUE(nodeptr);
-	EXPECT_EQ(4,nodeptr->data);
-	EXPECT_FALSE(nodeptr->left);
-	EXPECT_FALSE(nodeptr->right);
+	ASSERT_TRUE(nodeptr);
+	ASSERT_EQ(4,nodeptr->data);
+	ASSERT_FALSE(nodeptr->left);
+	ASSERT_FALSE(nodeptr->right);
 }
 
 TEST_F(test_BST, TestInsert){
@@ -170,9 +126,9 @@ TEST_F(test_BST, TestInsert){
 	mybst.Insert(four);
  
 	// expect pointer addresses to be same
-	EXPECT_EQ(one.get(),top->left.get());
-	EXPECT_EQ(three.get(),top->right.get());
-	EXPECT_EQ(four.get(),top->right->right.get());
+	ASSERT_EQ(one.get(),top->left.get());
+	ASSERT_EQ(three.get(),top->right.get());
+	ASSERT_EQ(four.get(),top->right->right.get());
 }
 
 TEST_F(test_BST, TestInsertData){
@@ -202,20 +158,20 @@ TEST_F(test_BST, TestInsertData){
 	mybst.InsertData(4);
  
 	// root shouldn't be null
-	EXPECT_TRUE(mybst.GetRoot());
+	ASSERT_TRUE(mybst.GetRoot());
 
 	// check for values in the nodes
-	EXPECT_EQ(2,mybst.GetRoot()->data);
-	EXPECT_EQ(1,mybst.GetRoot()->left->data);
-	EXPECT_EQ(3,mybst.GetRoot()->right->data);
-	EXPECT_EQ(4,mybst.GetRoot()->right->right->data);
+	ASSERT_EQ(2,mybst.GetRoot()->data);
+	ASSERT_EQ(1,mybst.GetRoot()->left->data);
+	ASSERT_EQ(3,mybst.GetRoot()->right->data);
+	ASSERT_EQ(4,mybst.GetRoot()->right->right->data);
 
 	// check for NULLs in the leafs
-	EXPECT_FALSE(mybst.GetRoot()->left->left);
-	EXPECT_FALSE(mybst.GetRoot()->left->right);
-	EXPECT_FALSE(mybst.GetRoot()->right->left);
-	EXPECT_FALSE(mybst.GetRoot()->right->right->left);
-	EXPECT_FALSE(mybst.GetRoot()->right->right->right);
+	ASSERT_FALSE(mybst.GetRoot()->left->left);
+	ASSERT_FALSE(mybst.GetRoot()->left->right);
+	ASSERT_FALSE(mybst.GetRoot()->right->left);
+	ASSERT_FALSE(mybst.GetRoot()->right->right->left);
+	ASSERT_FALSE(mybst.GetRoot()->right->right->right);
 
 }
 
@@ -224,7 +180,7 @@ TEST_F(test_BST, TestSize){
 	shared_ptr<bst_node> top = HandBuildTree();
 
 	BST mybst;
-	EXPECT_EQ(6,mybst.Size(top));
+	ASSERT_EQ(6,mybst.Size(top));
 }
 
 TEST_F(test_BST, TestContains){
@@ -234,19 +190,19 @@ TEST_F(test_BST, TestContains){
 	
 	BST mybst;
 
-	EXPECT_TRUE(mybst.Contains(top, 0));
-	EXPECT_TRUE(mybst.Contains(top, 1));
-	EXPECT_TRUE(mybst.Contains(top, 2));
-	EXPECT_TRUE(mybst.Contains(top, 3));
-	EXPECT_TRUE(mybst.Contains(top, 4));
-	EXPECT_TRUE(mybst.Contains(top, 5));
+	ASSERT_TRUE(mybst.Contains(top, 0));
+	ASSERT_TRUE(mybst.Contains(top, 1));
+	ASSERT_TRUE(mybst.Contains(top, 2));
+	ASSERT_TRUE(mybst.Contains(top, 3));
+	ASSERT_TRUE(mybst.Contains(top, 4));
+	ASSERT_TRUE(mybst.Contains(top, 5));
 	
 
-	EXPECT_FALSE(mybst.Contains(top, 22));
-	EXPECT_FALSE(mybst.Contains(top, -1));
-	EXPECT_FALSE(mybst.Contains(top, 10));
-	EXPECT_FALSE(mybst.Contains(top, 6));
-	EXPECT_FALSE(mybst.Contains(top, 78));
+	ASSERT_FALSE(mybst.Contains(top, 22));
+	ASSERT_FALSE(mybst.Contains(top, -1));
+	ASSERT_FALSE(mybst.Contains(top, 10));
+	ASSERT_FALSE(mybst.Contains(top, 6));
+	ASSERT_FALSE(mybst.Contains(top, 78));
 }
 
 TEST_F(test_BST, TestGetNode){
@@ -257,289 +213,106 @@ TEST_F(test_BST, TestGetNode){
 		shared_ptr<bst_node> empty(NULL);
 		shared_ptr<bst_node> result = mybst.GetNode(empty,50);
 		// result should be NULL
-		EXPECT_FALSE(result);
+		ASSERT_FALSE(result);
 	}
 	// tests getting nodes that we know are NOT there.
 	{
 		BST mybst;
 		shared_ptr<bst_node> top = HandBuildTree();
-		EXPECT_FALSE(mybst.GetNode(top,42));
-		EXPECT_FALSE(mybst.GetNode(top,-1));
+		ASSERT_FALSE(mybst.GetNode(top,42));
+		ASSERT_FALSE(mybst.GetNode(top,-1));
 	}
 	// tests getting nodes that we know are there.
 	{
 		BST mybst;
 		shared_ptr<bst_node> top = HandBuildTree();
-		EXPECT_EQ(mybst.GetNode(top,0),top->left);
-		EXPECT_EQ(mybst.GetNode(top,1),top);
-		EXPECT_EQ(mybst.GetNode(top,2),top->right->left->left);
-		EXPECT_EQ(mybst.GetNode(top,3),top->right->left);
-		EXPECT_EQ(mybst.GetNode(top,4),top->right);
-		EXPECT_EQ(mybst.GetNode(top,5),top->right->right);
+		ASSERT_EQ(mybst.GetNode(top,0),top->left);
+		ASSERT_EQ(mybst.GetNode(top,1),top);
+		ASSERT_EQ(mybst.GetNode(top,2),top->right->left->left);
+		ASSERT_EQ(mybst.GetNode(top,3),top->right->left);
+		ASSERT_EQ(mybst.GetNode(top,4),top->right);
+		ASSERT_EQ(mybst.GetNode(top,5),top->right->right);
 	}
 }
 
-
-TEST_F(test_BST, TestRemove){
+TEST_F(test_BST, TestRemove1child){
 	// Create separate scopes for this test.
   {
 		// Hand build a node with 0, 1, 2, 3, 4, 5 in it.
 		shared_ptr<bst_node> top = HandBuildTree();
 		
-		// remove the leaf node 5
 		BST mybst;
 		mybst.SetRoot(top);
 
+		// remove the leaf node 5
 		// try removing a leaf
 		mybst.Remove(5);
-		EXPECT_FALSE(top->right->right);
+		ASSERT_FALSE(top->right->right);
 	}	
 	{
 		// Tests removing a branch with one child.
-				// Hand build a node with 0, 1, 2, 3, 4, 5 in it.
-			shared_ptr<bst_node> top = HandBuildTree();
-			
-			// remove the leaf node 5
-			BST mybst;
-			mybst.SetRoot(top);
+		// Hand build a node with 0, 1, 2, 3, 4, 5 in it.
+		shared_ptr<bst_node> top = HandBuildTree();
+		
+		BST mybst;
+		mybst.SetRoot(top);
 
-			// try removing a leaf
-			mybst.Remove(5);
-			EXPECT_FALSE(top->right->right);
-
-
-
-    int size = treeSize(top);
-    int contents[size];
-    int expected[5] = {0, 1, 2, 3, 4};
-
-    inOrderWalk(top, contents);
-   
-    bool result = true;
-
-    for (int i = 0; i < 5; i++) {
-      if (contents[i] != expected[i]) {
-        result = false;
-        break;
-      }
-    }
-    result = result && size == 5;
-    
-    REQUIRE(result); // tests removing a leaf
-  }
-  {
-    // Hand build a node with 0, 1, 2, 3, 4, 5 in it.
-    bt_node* top = HandBuildTree();
-    
-    // remove the branch node 3
-    remove( &top, 3 );
-
-    int size = treeSize(top);
-    int contents[size];
-    int expected[5] = {0, 1, 2, 4, 5};
-
-    inOrderWalk(top, contents);
-   
-    bool result = true;
-
-    for (int i = 0; i < 5; i++) {
-      if (contents[i] != expected[i]) {
-        result = false;
-        break;
-      }
-    }
-    result = result && size == 5;
-    
-    REQUIRE(result); // Tests removing a branch with one child.
-  }
-}
-/*
-
-
-
-TEST_CASE("bst: remove", "[remove]") {
-  // Create separate scopes for this test.
-  {
-    // Hand build a node with 0, 1, 2, 3, 4, 5 in it.
-    bt_node* top = HandBuildTree();
-    
-    // remove the leaf node 5
-    remove( &top, 5 );
-
-    int size = treeSize(top);
-    int contents[size];
-    int expected[5] = {0, 1, 2, 3, 4};
-
-    inOrderWalk(top, contents);
-   
-    bool result = true;
-
-    for (int i = 0; i < 5; i++) {
-      if (contents[i] != expected[i]) {
-        result = false;
-        break;
-      }
-    }
-    result = result && size == 5;
-    
-    REQUIRE(result); // tests removing a leaf
-  }
-  {
-    // Hand build a node with 0, 1, 2, 3, 4, 5 in it.
-    bt_node* top = HandBuildTree();
-    
-    // remove the branch node 3
-    remove( &top, 3 );
-
-    int size = treeSize(top);
-    int contents[size];
-    int expected[5] = {0, 1, 2, 4, 5};
-
-    inOrderWalk(top, contents);
-   
-    bool result = true;
-
-    for (int i = 0; i < 5; i++) {
-      if (contents[i] != expected[i]) {
-        result = false;
-        break;
-      }
-    }
-    result = result && size == 5;
-    
-    REQUIRE(result); // Tests removing a branch with one child.
-  }
+		mybst.Remove(3);
+		ASSERT_FALSE(top->right->left);
+	}
 }
 
-TEST_CASE("bst: remove with 2 children", "[remove fork]") {
-  // Hand build a node with 0, 1, 2, 3, 4 in it.
-  bt_node* top = HandBuildTree();
-  
-  // remove the trunk node 1
-  // Note that there are two possible results for this depending on
-  // what bias the tree is.
-  remove( &top, 1 );
-  
-  int size = treeSize(top);
-  REQUIRE(size == 5);
-  int contents[size];
-  int expected[5] = {0, 2, 3, 4, 5};
-  
-  inOrderWalk(top, contents);
-  
-  bool result = true;
-  
-  for (int i = 0; i < 5; i++) {
-    cout << "expecting " << expected[i] << ", actual " << contents[i] << endl;
-    REQUIRE(contents[i] == expected[i]);
-  }
+TEST_F(test_BST, TestRemoveforke){
+	shared_ptr<bst_node> top = HandBuildTree();
+	
+	BST mybst;
+	mybst.SetRoot(top);
+
+	mybst.Remove(4);
+	ASSERT_FALSE(top->right);
 }
 
-TEST_CASE("bst: to array", "[to array]") {
-  bt_node* top = HandBuildTree();
-  
-  int results[6] = {-1, -1, -1, -1, -1, -1};
-  to_array(top, results);
-  
-  REQUIRE(results[0] != -1);
-  REQUIRE(results[1] != -1);
-  REQUIRE(results[2] != -1);
-  REQUIRE(results[3] != -1);
-  REQUIRE(results[4] != -1);
-  REQUIRE(results[5] != -1);
-  
-  REQUIRE(ArrayContains(results, 6, 0));
-  REQUIRE(ArrayContains(results, 6, 1));
-  REQUIRE(ArrayContains(results, 6, 2));
-  REQUIRE(ArrayContains(results, 6, 3));
-  REQUIRE(ArrayContains(results, 6, 4));
-  REQUIRE(ArrayContains(results, 6, 5));
-  
-  REQUIRE(results[0] == 0);
-  REQUIRE(results[1] == 1);
-  REQUIRE(results[2] == 2);
-  REQUIRE(results[3] == 3);
-  REQUIRE(results[4] == 4);
-  REQUIRE(results[5] == 5); 
+bool VectorContains (vector<int>& vec, int value){
+	for(unsigned int i = 0; i < vec.size(); i++){
+    	if(vec[i] == value){
+			return true;
+		}
+	}
+	return false;
 }
 
-bt_node* HandBuildNode ( int data )
-{
-  bt_node* top = new bt_node();
-  top->data = data;
-  top->left = NULL;
-  top->right = NULL;
-  
-  return top;
+TEST_F(test_BST, TestToVector){
+	
+	BST mybst;
+	shared_ptr<bst_node> top = HandBuildTree();
+
+	// create a std::vector of size 6 with all values initialized to -1
+	vector<int> vec(6,-1);
+
+	// ToVector function should update all vector indices with values from tree
+	mybst.ToVector(top,vec);
+
+	// check if something was filled in
+	ASSERT_NE(-1,vec[0]);
+	ASSERT_NE(-1,vec[1]);
+	ASSERT_NE(-1,vec[2]);
+	ASSERT_NE(-1,vec[3]);
+	ASSERT_NE(-1,vec[4]);
+	ASSERT_NE(-1,vec[5]);
+
+	// check if values were actually from the tree  
+	ASSERT_TRUE(VectorContains(vec,0));
+	ASSERT_TRUE(VectorContains(vec,1));
+	ASSERT_TRUE(VectorContains(vec,2));
+	ASSERT_TRUE(VectorContains(vec,3));
+	ASSERT_TRUE(VectorContains(vec,4));
+	ASSERT_TRUE(VectorContains(vec,5));
+
+	// check if values were from inorder walk of the tree
+	ASSERT_EQ(0,vec[0]);
+	ASSERT_EQ(1,vec[1]);
+	ASSERT_EQ(2,vec[2]);
+	ASSERT_EQ(3,vec[3]);
+	ASSERT_EQ(4,vec[4]);
+	ASSERT_EQ(5,vec[5]);
 }
-
-bt_node* HandBuildTree ( )
-{
-  // Hand build an unbalanced tree with 0, 1, 2, 3, 4, 5 in it. Looks
-  // like this:
-  //
-  //    1
-  //   / \
-  //  0   4
-  //     /  \
-  //    3    5
-  //   /
-  //  2
-  //
-  bt_node* top = HandBuildNode(1);
-  top->left = HandBuildNode(0);
-  top->right = HandBuildNode(4);
-  top->right->left = HandBuildNode(3);
-  top->right->left->left = HandBuildNode(2);
-  top->right->right = HandBuildNode(5);
-  
-  return top;
-}
-
-static void _inOrderWalk( bt_node* top, int arr[], int * index ) {
-  if (!top) return;
-  // first make an array out of the left side
-  if (top->left) _inOrderWalk(top->left, arr, index);
-
-  // add our current node
-  arr[*index] = top->data;
-  (*index)++;
-
-  // and make one from the right
-  if (top->right) _inOrderWalk(top->right, arr, index);
-}
-
-void inOrderWalk( bt_node* top, int arr[]) {
-  // check for empty tree
-  if (!top) return;
-
-  int index = 0;
-
-  // call our helper, with the added index field
-  // to keep track of our position in the array
-  _inOrderWalk(top, arr, &index);
-}
-
-int treeSize( bt_node* top) {
-  if (!top) return 0; 
-
-  int left = 0; 
-  int right = 0; 
-
-  if (top->left)  left =  treeSize(top->left); 
-  if (top->right) right = treeSize(top->right); 
-
-  return left + right + 1; 
-}
-
-bool ArrayContains ( int arr[], int size, int value )
-{
-  for ( int i = 0; i < size; i++ )
-    {
-      if ( arr[i] == value )
-	return true;
-    }
-  
-  return false;
-}
-*/

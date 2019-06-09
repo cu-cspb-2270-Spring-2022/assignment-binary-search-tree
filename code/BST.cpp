@@ -45,9 +45,9 @@ int BST::Size(shared_ptr<bst_node> subt){
   return ret;
 }
 
-void BST::ToArray(shared_ptr<bst_node> subt, vector<int>& arr){
+void BST::ToVector(shared_ptr<bst_node> subt, vector<int>& vec){
   // Your code here
-  // eventually fill in arr ex. arr[0] = 1;
+  // eventually fill in vec ex. vec[0] = 1;
 }
 
 // This function is implemented for you
