@@ -10,9 +10,8 @@ BST::~BST(){
 }
 
 shared_ptr<bst_node> BST::InitNode(int data){
-  shared_ptr<bst_node> ret;
   // Your code here
-  return ret;
+  return shared_ptr<bst_node>(NULL);
 }
 
 void BST::Insert(shared_ptr<bst_node> new_node){
@@ -27,22 +26,19 @@ void BST::Remove(int data){
   // Your code here
 }
 
-bool BST::Contains(shared_ptr<bst_node> t, int data){
-  bool ret;
+bool BST::Contains(shared_ptr<bst_node> subt, int data){
   // Your code here
-  return ret;
+  return false;
 }
 
 shared_ptr<bst_node> BST::GetNode(shared_ptr<bst_node> subt, int data){
-  shared_ptr<bst_node> ret;
   // Your code here
-  return ret;
+  return shared_ptr<bst_node>(NULL);
 }
 
 int BST::Size(shared_ptr<bst_node> subt){
-  int ret;
   // Your code here
-  return ret;
+  return 0;
 }
 
 void BST::ToVector(shared_ptr<bst_node> subt, vector<int>& vec){

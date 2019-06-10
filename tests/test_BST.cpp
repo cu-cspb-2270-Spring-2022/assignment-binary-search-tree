@@ -22,7 +22,7 @@ protected:
 		if(outgrade.is_open())
 		outgrade.clear();
 
-		max_grade = 100;
+		max_grade = 23;
 
 		outgrade << (int)std::ceil(100*total_grade/max_grade);
 		outgrade.close();
@@ -53,7 +53,7 @@ int test_BST::max_grade = 0;
 
 shared_ptr<bst_node> HandBuildNode( int data )
 {
-  shared_ptr<bst_node> top(new bst_node());
+  shared_ptr<bst_node> top(new bst_node);
   top->data = data;
   top->left = NULL;
   top->right = NULL;
@@ -87,36 +87,41 @@ shared_ptr<bst_node> HandBuildTree ( )
 TEST_F(test_BST, TestConstructor){
 	BST mybst;
 	// expect root to be NULL when BST object constructed
-	// ASSERT_FALSE(mybst.GetRoot());
+	ASSERT_FALSE(mybst.GetRoot());
+	add_points_to_grade(2);
 }
 
 TEST_F(test_BST, TestInit){
 	BST mybst;
 	shared_ptr<bst_node> nodeptr = mybst.InitNode(4);  
 	ASSERT_TRUE(nodeptr);
+	add_points_to_grade(1);
 	ASSERT_EQ(4,nodeptr->data);
+	add_points_to_grade(1);
 	ASSERT_FALSE(nodeptr->left);
+	add_points_to_grade(1);
 	ASSERT_FALSE(nodeptr->right);
+	add_points_to_grade(1);
 }
 
 TEST_F(test_BST, TestInsert){
 	// hand build four nodes
 	shared_ptr<bst_node> top(new bst_node());
-  	top->data = 2;
-  	top->left = NULL;
-  	top->right = NULL;
+	top->data = 2;
+	top->left = NULL;
+	top->right = NULL;
 	shared_ptr<bst_node> one(new bst_node());
-  	one->data = 1;
-  	one->left = NULL;
-  	one->right = NULL;
+	one->data = 1;
+	one->left = NULL;
+	one->right = NULL;
 	shared_ptr<bst_node> three(new bst_node());
-  	three->data = 3;
-  	three->left = NULL;
-  	three->right = NULL;
+	three->data = 3;
+	three->left = NULL;
+	three->right = NULL;
 	shared_ptr<bst_node> four(new bst_node());
-  	four->data = 4;
-  	four->left = NULL;
-  	four->right = NULL;
+	four->data = 4;
+	four->left = NULL;
+	four->right = NULL;
 
 	// insert them
 	BST mybst;
@@ -127,28 +132,31 @@ TEST_F(test_BST, TestInsert){
  
 	// expect pointer addresses to be same
 	ASSERT_EQ(one.get(),top->left.get());
+	add_points_to_grade(2);
 	ASSERT_EQ(three.get(),top->right.get());
+	add_points_to_grade(2);
 	ASSERT_EQ(four.get(),top->right->right.get());
+	add_points_to_grade(2);
 }
 
 TEST_F(test_BST, TestInsertData){
 	// hand build four nodes
-	shared_ptr<bst_node> top(new bst_node());
-  	top->data = 2;
-  	top->left = NULL;
-  	top->right = NULL;
-	shared_ptr<bst_node> one(new bst_node());
-  	one->data = 1;
-  	one->left = NULL;
-  	one->right = NULL;
-	shared_ptr<bst_node> three(new bst_node());
-  	three->data = 3;
-  	three->left = NULL;
-  	three->right = NULL;
-	shared_ptr<bst_node> four(new bst_node());
-  	four->data = 4;
-  	four->left = NULL;
-  	four->right = NULL;
+	shared_ptr<bst_node> top(new bst_node);
+	top->data = 2;
+	top->left = NULL;
+	top->right = NULL;
+	shared_ptr<bst_node> one(new bst_node);
+	one->data = 1;
+	one->left = NULL;
+	one->right = NULL;
+	shared_ptr<bst_node> three(new bst_node);
+	three->data = 3;
+	three->left = NULL;
+	three->right = NULL;
+	shared_ptr<bst_node> four(new bst_node);
+	four->data = 4;
+	four->left = NULL;
+	four->right = NULL;
 
 	// insert them
 	BST mybst;
@@ -159,20 +167,29 @@ TEST_F(test_BST, TestInsertData){
  
 	// root shouldn't be null
 	ASSERT_TRUE(mybst.GetRoot());
+	add_points_to_grade(0.7);
 
 	// check for values in the nodes
 	ASSERT_EQ(2,mybst.GetRoot()->data);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(1,mybst.GetRoot()->left->data);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(3,mybst.GetRoot()->right->data);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(4,mybst.GetRoot()->right->right->data);
+	add_points_to_grade(0.7);
 
 	// check for NULLs in the leafs
 	ASSERT_FALSE(mybst.GetRoot()->left->left);
+	add_points_to_grade(0.7);
 	ASSERT_FALSE(mybst.GetRoot()->left->right);
+	add_points_to_grade(0.7);
 	ASSERT_FALSE(mybst.GetRoot()->right->left);
+	add_points_to_grade(0.7);
 	ASSERT_FALSE(mybst.GetRoot()->right->right->left);
+	add_points_to_grade(0.7);
 	ASSERT_FALSE(mybst.GetRoot()->right->right->right);
-
+	add_points_to_grade(0.7);
 }
 
 TEST_F(test_BST, TestSize){
@@ -181,6 +198,7 @@ TEST_F(test_BST, TestSize){
 
 	BST mybst;
 	ASSERT_EQ(6,mybst.Size(top));
+	add_points_to_grade(6);
 }
 
 TEST_F(test_BST, TestContains){
@@ -192,17 +210,26 @@ TEST_F(test_BST, TestContains){
 
 	ASSERT_TRUE(mybst.Contains(top, 0));
 	ASSERT_TRUE(mybst.Contains(top, 1));
+	add_points_to_grade(0.8);
 	ASSERT_TRUE(mybst.Contains(top, 2));
+	add_points_to_grade(0.8);
 	ASSERT_TRUE(mybst.Contains(top, 3));
+	add_points_to_grade(0.8);
 	ASSERT_TRUE(mybst.Contains(top, 4));
+	add_points_to_grade(0.8);
 	ASSERT_TRUE(mybst.Contains(top, 5));
-	
+	add_points_to_grade(0.8);
 
 	ASSERT_FALSE(mybst.Contains(top, 22));
+	add_points_to_grade(0.8);
 	ASSERT_FALSE(mybst.Contains(top, -1));
+	add_points_to_grade(0.8);
 	ASSERT_FALSE(mybst.Contains(top, 10));
+	add_points_to_grade(0.8);
 	ASSERT_FALSE(mybst.Contains(top, 6));
+	add_points_to_grade(0.8);
 	ASSERT_FALSE(mybst.Contains(top, 78));
+	add_points_to_grade(0.8);
 }
 
 TEST_F(test_BST, TestGetNode){
@@ -214,24 +241,33 @@ TEST_F(test_BST, TestGetNode){
 		shared_ptr<bst_node> result = mybst.GetNode(empty,50);
 		// result should be NULL
 		ASSERT_FALSE(result);
+		add_points_to_grade(1);
 	}
 	// tests getting nodes that we know are NOT there.
 	{
 		BST mybst;
 		shared_ptr<bst_node> top = HandBuildTree();
 		ASSERT_FALSE(mybst.GetNode(top,42));
+		add_points_to_grade(0.5);
 		ASSERT_FALSE(mybst.GetNode(top,-1));
-	}
+		add_points_to_grade(0.5);
+}
 	// tests getting nodes that we know are there.
 	{
 		BST mybst;
 		shared_ptr<bst_node> top = HandBuildTree();
 		ASSERT_EQ(mybst.GetNode(top,0),top->left);
+		add_points_to_grade(0.5);
 		ASSERT_EQ(mybst.GetNode(top,1),top);
+		add_points_to_grade(0.5);
 		ASSERT_EQ(mybst.GetNode(top,2),top->right->left->left);
+		add_points_to_grade(0.5);
 		ASSERT_EQ(mybst.GetNode(top,3),top->right->left);
+		add_points_to_grade(0.5);
 		ASSERT_EQ(mybst.GetNode(top,4),top->right);
+		add_points_to_grade(0.5);
 		ASSERT_EQ(mybst.GetNode(top,5),top->right->right);
+		add_points_to_grade(0.5);
 	}
 }
 
@@ -248,6 +284,8 @@ TEST_F(test_BST, TestRemove1child){
 		// try removing a leaf
 		mybst.Remove(5);
 		ASSERT_FALSE(top->right->right);
+		add_points_to_grade(0.5);
+
 	}	
 	{
 		// Tests removing a branch with one child.
@@ -258,18 +296,38 @@ TEST_F(test_BST, TestRemove1child){
 		mybst.SetRoot(top);
 
 		mybst.Remove(3);
-		ASSERT_FALSE(top->right->left);
+		ASSERT_FALSE(top->right->left->left);
+		add_points_to_grade(0.5);
+		ASSERT_EQ(2,top->right->left->data);
+		add_points_to_grade(0.5);
 	}
 }
 
-TEST_F(test_BST, TestRemoveforke){
-	shared_ptr<bst_node> top = HandBuildTree();
-	
-	BST mybst;
-	mybst.SetRoot(top);
-
-	mybst.Remove(4);
-	ASSERT_FALSE(top->right);
+TEST_F(test_BST, TestRemovefork){
+	{
+		shared_ptr<bst_node> top = HandBuildTree();
+		BST mybst;
+		mybst.SetRoot(top);
+		// Remove a node with two children (root)
+		mybst.Remove(1);
+		ASSERT_EQ(2,top->data);
+		add_points_to_grade(0.25);
+		ASSERT_FALSE(top->right->left->left);
+		add_points_to_grade(0.25);
+	}
+	{
+		shared_ptr<bst_node> top = HandBuildTree();
+		BST mybst;
+		mybst.SetRoot(top);
+		// Remove a node with two children (non-root)
+		mybst.Remove(4);
+		ASSERT_EQ(5,top->right->data);
+		add_points_to_grade(1);
+		ASSERT_EQ(1,top->data);
+		add_points_to_grade(1);
+		ASSERT_FALSE(top->right->right);
+		add_points_to_grade(1);
+	}
 }
 
 bool VectorContains (vector<int>& vec, int value){
@@ -287,32 +345,40 @@ TEST_F(test_BST, TestToVector){
 	shared_ptr<bst_node> top = HandBuildTree();
 
 	// create a std::vector of size 6 with all values initialized to -1
-	vector<int> vec(6,-1);
+	vector<int> vec;
 
 	// ToVector function should update all vector indices with values from tree
 	mybst.ToVector(top,vec);
 
-	// check if something was filled in
-	ASSERT_NE(-1,vec[0]);
-	ASSERT_NE(-1,vec[1]);
-	ASSERT_NE(-1,vec[2]);
-	ASSERT_NE(-1,vec[3]);
-	ASSERT_NE(-1,vec[4]);
-	ASSERT_NE(-1,vec[5]);
+	// check if vec was filled in
+	ASSERT_EQ(6,vec.size());
+	add_points_to_grade(1);
 
 	// check if values were actually from the tree  
 	ASSERT_TRUE(VectorContains(vec,0));
+	add_points_to_grade(0.5);
 	ASSERT_TRUE(VectorContains(vec,1));
+	add_points_to_grade(0.5);
 	ASSERT_TRUE(VectorContains(vec,2));
+	add_points_to_grade(0.7);
 	ASSERT_TRUE(VectorContains(vec,3));
+	add_points_to_grade(0.7);
 	ASSERT_TRUE(VectorContains(vec,4));
+	add_points_to_grade(0.7);
 	ASSERT_TRUE(VectorContains(vec,5));
+	add_points_to_grade(0.7);
 
 	// check if values were from inorder walk of the tree
 	ASSERT_EQ(0,vec[0]);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(1,vec[1]);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(2,vec[2]);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(3,vec[3]);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(4,vec[4]);
+	add_points_to_grade(0.7);
 	ASSERT_EQ(5,vec[5]);
+	add_points_to_grade(0.7);
 }
