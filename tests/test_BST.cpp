@@ -13,24 +13,31 @@ using namespace std;
 
 class test_BST : public ::testing::Test {
 protected:
-	static void SetUpTestCase(){
-	}
-
 	// This function runs only once before any TEST_F function
-	static void TearDownTestCase(){
+	static void SetUpTestCase(){
 		std::ofstream outgrade("./total_grade.txt");
-		if(outgrade.is_open())
-		outgrade.clear();
-
-		max_grade = 23;
-
-		outgrade << (int)std::ceil(100*total_grade/max_grade);
-		outgrade.close();
-
-		std::cout << "Total Grade is : " << (int)std::ceil(100*total_grade/max_grade) << std::endl;
+		if(outgrade.is_open()){
+			outgrade.clear();
+			outgrade << (int)0;
+			outgrade.close();
+		}
 	}
 
 	// This function runs after all TEST_F functions have been executed
+	static void TearDownTestCase(){
+		std::ofstream outgrade("./total_grade.txt");
+		if(outgrade.is_open()){
+			outgrade.clear();
+	
+			max_grade = 23;
+	
+			outgrade << (int)std::ceil(100*total_grade/max_grade);
+			outgrade.close();
+		
+			std::cout << "Total Grade is : " << (int)std::ceil(100*total_grade/max_grade) << std::endl;
+		}
+	}
+
 	void add_points_to_grade(int points){
 		max_grade += points;
 		if(!::testing::Test::HasFailure()){
