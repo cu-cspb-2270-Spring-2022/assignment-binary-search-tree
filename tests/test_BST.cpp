@@ -49,7 +49,19 @@ protected:
 	void SetUp() override {}
 
 	// this function runs after ever TEST_F function
-	void TearDown() override {}
+	void TearDown() override {
+		std::ofstream outgrade("./total_grade.txt");
+		if(outgrade.is_open()){
+			outgrade.clear();
+	
+			max_grade = 23;
+	
+			outgrade << (int)std::ceil(100*total_grade/max_grade);
+			outgrade.close();
+		
+			std::cout << "Total Grade is : " << (int)std::ceil(100*total_grade/max_grade) << std::endl;
+		}
+	}
 	
 	static int total_grade;
 	static int max_grade;
