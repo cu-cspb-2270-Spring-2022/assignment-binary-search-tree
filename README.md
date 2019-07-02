@@ -1,5 +1,5 @@
 # BinarySearchTree (BST)
-In this assignment you will implement a Linked List Class
+In this assignment you will implement a Binary Search Tree
 
 Project has following folder tree
 
@@ -80,8 +80,7 @@ if you are using vscode environment in JupyterHub, you just need to make sure yo
 
 ## About This homework
 
-In this assignment you'll implement a linked list data
-structure. We've covered the struct and associated operations in the
+In this assignment you'll implement a Binary Search Tree ADT. We've covered the struct and associated operations in the
 video lectures. Here's a summary:
 
 * **BST()** - BST constructor,.
