@@ -28,14 +28,14 @@ protected:
 		std::ofstream outgrade("./total_grade.txt");
 		if(outgrade.is_open()){
 			outgrade.clear();
-			outgrade << (int)std::ceil(100*total_grade/max_grade);
+			outgrade << (int)(100*total_grade/max_grade);
 			outgrade.close();
 		
-			std::cout << "Total Grade is : " << (int)std::ceil(100*total_grade/max_grade) << std::endl;
+			std::cout << "Total Grade is : " << (int)(100*total_grade/max_grade) << std::endl;
 		}
 	}
 
-	void add_points_to_grade(int points){
+	void add_points_to_grade(double points){
 		if(!::testing::Test::HasFailure()){
 			total_grade += points;
 		}
@@ -49,17 +49,17 @@ protected:
 		std::ofstream outgrade("./total_grade.txt");
 		if(outgrade.is_open()){
 			outgrade.clear();
-			outgrade << (int)std::ceil(100*total_grade/max_grade);
+			outgrade << (int)(100*total_grade/max_grade);
 			outgrade.close();
 		}
 	}
 	
-	static int total_grade;
-	static int max_grade;
+	static double total_grade;
+	static double max_grade;
 };
 
-int test_BST::total_grade = 0;
-int test_BST::max_grade = 23;
+double test_BST::total_grade = 0;
+double test_BST::max_grade = 52;
 
 shared_ptr<bst_node> HandBuildNode( int data )
 {
