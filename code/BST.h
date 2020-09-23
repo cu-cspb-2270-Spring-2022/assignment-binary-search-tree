@@ -66,12 +66,12 @@ public:
   // the array elements are the same that is found during an INORDER
   // traversal of the subtree.
   //
-  // Note: the vector is created and sized before this function is
-  // called. You will have at least Size(root_ptr_) elements available, so you
-  // may safely index [0..size(t)-1].
+  // Note: the vector "vec" will be passed to this function as an empty vector
+  // and you can add elements to it by using push_back() member function of vector
+  // class. for example to add an integer stored at variable "a" you can do vec.push_back(a);
   // vector<int> is a cpp class which defines a vector of type int.
-  // for example you can define a vector of size 10 like:
-  // vector<int> my_vec(10);
+  // for example one can define an empty vector like:
+  // vector<int> my_vec;
   // and pass that vector by reference to ToArray function to be filled like:
   // ToVector(somesharedpointer, my_vec)
   void ToVector(shared_ptr<bst_node> subt, vector<int>& vec);
