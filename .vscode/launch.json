@@ -12,6 +12,14 @@
             "cwd": "${workspaceFolder}/build",
             "valuesFormatting": "parseText"
         },
+        {
+            "type": "gdb",
+            "request": "launch",
+            "name": "Run App",
+            "target": "./run_app",
+            "cwd": "${workspaceFolder}/build",
+            "valuesFormatting": "parseText"
+        },
         // {
         //     "name": "Run Tests",
         //     "type": "cppdbg",
