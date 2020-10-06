@@ -5,62 +5,46 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "gdb",
-            "request": "launch",
             "name": "Run Tests",
-            "target": "./run_tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "make project",
+            "program": "${workspaceFolder}/build/run_tests",
+            "args": [],
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",
-            "valuesFormatting": "parseText"
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "type": "gdb",
-            "request": "launch",
             "name": "Run App",
-            "target": "./run_app",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "make project",
+            "program": "${workspaceFolder}/build/run_app",
+            "args": [],
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",
-            "valuesFormatting": "parseText"
-        },
-        // {
-        //     "name": "Run Tests",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "preLaunchTask": "make project",
-        //     "program": "${workspaceFolder}/build/run_tests",
-        //     "args": [],
-        //     "stopAtEntry": false,
-        //     "cwd": "${workspaceFolder}/build",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "gdb",
-        //     "setupCommands": [
-        //         {
-        //             "description": "Enable pretty-printing for gdb",
-        //             "text": "-enable-pretty-printing",
-        //             "ignoreFailures": false
-        //         }
-        //     ],
-        //     "miDebuggerPath": "/usr/bin/gdb"
-        // },
-        // {
-        //     "name": "Run App",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "preLaunchTask": "make project",
-        //     "program": "${workspaceFolder}/build/run_app",
-        //     "args": [],
-        //     "stopAtEntry": false,
-        //     "cwd": "${workspaceFolder}/build",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "gdb",
-        //     "setupCommands": [
-        //         {
-        //             "description": "Enable pretty-printing for gdb",
-        //             "text": "-enable-pretty-printing",
-        //             "ignoreFailures": false
-        //         }
-        //     ],
-        //     "miDebuggerPath": "/usr/bin/gdb"
-        // }
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
     ]
 }
