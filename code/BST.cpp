@@ -11,7 +11,8 @@ BST::~BST(){
 
 shared_ptr<bst_node> BST::InitNode(int data){
   // Your code here
-  return shared_ptr<bst_node>(NULL);
+  shared_ptr<bst_node> ret;  
+  return ret;
 }
 
 void BST::Insert(shared_ptr<bst_node> new_node){
