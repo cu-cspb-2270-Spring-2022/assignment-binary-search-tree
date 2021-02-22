@@ -320,9 +320,9 @@ TEST_F(test_BST, TestRemovefork){
 		mybst.SetRoot(top);
 		// Remove a node with two children (root)
 		mybst.Remove(1);
-		ASSERT_EQ(2,top->data);
+		ASSERT_EQ(2,mybst.GetRoot()->data);
 		add_points_to_grade(0.25);
-		ASSERT_FALSE(top->right->left->left);
+		ASSERT_FALSE(mybst.GetRoot()->right->left->left);
 		add_points_to_grade(0.25);
 	}
 	{
